@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2017 at 12:45 PM
+-- Generation Time: Sep 12, 2017 at 12:02 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -23,16 +23,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `classifications`
+--
+
+CREATE TABLE `classifications` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `classification` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `classifications`
+--
+
+INSERT INTO `classifications` (`id`, `classification`) VALUES
+(3, 'BSCS'),
+(4, 'BSIT-ANIMATION'),
+(5, 'BSIT-WEBDEV'),
+(6, 'BSIT-NETWORKING'),
+(7, 'ALL COURSES');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faculty`
 --
 
 CREATE TABLE `faculty` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `degree` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `undergrad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postgrad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `roleId` int(10) UNSIGNED NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`id`, `name`, `undergrad`, `postgrad`, `roleId`, `password`) VALUES
+(1, 'Joshua Jimenez', 'BS Computer Science, HAU', 'Master of Computer Science, HAU', 1, 'secret'),
+(2, 'Jericho Diaz', 'BS Computer Science, HAU', '', 2, 'secret');
 
 -- --------------------------------------------------------
 
@@ -46,32 +77,15 @@ CREATE TABLE `facultyloads` (
   `subjectId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `migrations`
+-- Dumping data for table `facultyloads`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2017_09_09_081538_Faculty', 1),
-(2, '2017_09_09_081614_Roles', 1),
-(3, '2017_09_09_081641_Seminars', 1),
-(4, '2017_09_09_084956_SeminarTypes', 1),
-(5, '2017_09_09_085047_SeminarsAttendance', 1),
-(6, '2017_09_09_085720_Subjects', 1),
-(7, '2017_09_09_085854_FacultyLoads', 1),
-(8, '2017_09_09_102814_SeminarClassifications', 1),
-(9, '2017_09_09_102936_Relationships', 1);
+INSERT INTO `facultyloads` (`id`, `facultyId`, `subjectId`) VALUES
+(2, 1, 2),
+(1, 1, 3),
+(3, 2, 4),
+(4, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -84,16 +98,13 @@ CREATE TABLE `roles` (
   `roleName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `seminarclassifications`
+-- Dumping data for table `roles`
 --
 
-CREATE TABLE `seminarclassifications` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `classification` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `roles` (`id`, `roleName`) VALUES
+(1, 'ADMIN'),
+(2, 'FACULTY');
 
 -- --------------------------------------------------------
 
@@ -105,9 +116,18 @@ CREATE TABLE `seminars` (
   `id` int(10) UNSIGNED NOT NULL,
   `seminarName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `seminarType` int(10) UNSIGNED NOT NULL,
-  `seminarClassification` int(10) UNSIGNED NOT NULL,
+  `classificationId` int(10) UNSIGNED NOT NULL,
+  `venue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `seminars`
+--
+
+INSERT INTO `seminars` (`id`, `seminarName`, `seminarType`, `classificationId`, `venue`, `date`) VALUES
+(1, 'Cisco Networking Academy Partner Conference', 5, 5, 'The Manor, Baguio City', '2017-09-13'),
+(2, 'Training on Good Research Practice(CLHRDC)', 6, 6, 'PGN HAU', '2017-09-10');
 
 -- --------------------------------------------------------
 
@@ -121,6 +141,15 @@ CREATE TABLE `seminarsattendance` (
   `seminarId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `seminarsattendance`
+--
+
+INSERT INTO `seminarsattendance` (`id`, `facultyId`, `seminarId`) VALUES
+(1, 1, 1),
+(4, 2, 1),
+(2, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -129,8 +158,17 @@ CREATE TABLE `seminarsattendance` (
 
 CREATE TABLE `seminartypes` (
   `id` int(10) UNSIGNED NOT NULL,
-  `type` int(10) UNSIGNED NOT NULL
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `seminartypes`
+--
+
+INSERT INTO `seminartypes` (`id`, `type`) VALUES
+(5, 'HRD/ARO (NONMAJOR)'),
+(6, 'WORKSHOP'),
+(7, 'TALK');
 
 -- --------------------------------------------------------
 
@@ -140,12 +178,30 @@ CREATE TABLE `seminartypes` (
 
 CREATE TABLE `subjects` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `classificationId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`, `classificationId`) VALUES
+(1, '6COMPRO3L', 7),
+(2, '6WEBTECH3', 5),
+(3, '6ROUTING', 6),
+(4, '6BDRAW', 4),
+(5, '6COMPRO3L', 3);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `classifications`
+--
+ALTER TABLE `classifications`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `faculty`
@@ -159,14 +215,8 @@ ALTER TABLE `faculty`
 --
 ALTER TABLE `facultyloads`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `facultyloads_facultyid_foreign` (`facultyId`),
-  ADD KEY `facultyloads_subjectid_foreign` (`subjectId`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `facultyloads` (`subjectId`,`facultyId`),
+  ADD KEY `facultyloads_facultyid_foreign` (`facultyId`);
 
 --
 -- Indexes for table `roles`
@@ -175,26 +225,20 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `seminarclassifications`
---
-ALTER TABLE `seminarclassifications`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `seminars`
 --
 ALTER TABLE `seminars`
   ADD PRIMARY KEY (`id`),
   ADD KEY `seminars_seminartype_foreign` (`seminarType`),
-  ADD KEY `seminars_seminarclassification_foreign` (`seminarClassification`);
+  ADD KEY `seminars_classificationid_foreign` (`classificationId`);
 
 --
 -- Indexes for table `seminarsattendance`
 --
 ALTER TABLE `seminarsattendance`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `seminarsattendance_facultyid_foreign` (`facultyId`),
-  ADD KEY `seminarsattendance_seminarid_foreign` (`seminarId`);
+  ADD UNIQUE KEY `seminarsattendance` (`seminarId`,`facultyId`),
+  ADD KEY `seminarsattendance_facultyid_foreign` (`facultyId`);
 
 --
 -- Indexes for table `seminartypes`
@@ -206,57 +250,53 @@ ALTER TABLE `seminartypes`
 -- Indexes for table `subjects`
 --
 ALTER TABLE `subjects`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subjects_classificationid_foreign` (`classificationId`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `classifications`
+--
+ALTER TABLE `classifications`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `facultyloads`
 --
 ALTER TABLE `facultyloads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `seminarclassifications`
---
-ALTER TABLE `seminarclassifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `seminars`
 --
 ALTER TABLE `seminars`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `seminarsattendance`
 --
 ALTER TABLE `seminarsattendance`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `seminartypes`
 --
 ALTER TABLE `seminartypes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
@@ -278,7 +318,7 @@ ALTER TABLE `facultyloads`
 -- Constraints for table `seminars`
 --
 ALTER TABLE `seminars`
-  ADD CONSTRAINT `seminars_seminarclassification_foreign` FOREIGN KEY (`seminarClassification`) REFERENCES `seminarclassifications` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `seminars_classificationid_foreign` FOREIGN KEY (`classificationId`) REFERENCES `classifications` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `seminars_seminartype_foreign` FOREIGN KEY (`seminarType`) REFERENCES `seminartypes` (`id`) ON DELETE CASCADE;
 
 --
@@ -287,6 +327,12 @@ ALTER TABLE `seminars`
 ALTER TABLE `seminarsattendance`
   ADD CONSTRAINT `seminarsattendance_facultyid_foreign` FOREIGN KEY (`facultyId`) REFERENCES `faculty` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `seminarsattendance_seminarid_foreign` FOREIGN KEY (`seminarId`) REFERENCES `seminars` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD CONSTRAINT `subjects_classificationid_foreign` FOREIGN KEY (`classificationId`) REFERENCES `classifications` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
