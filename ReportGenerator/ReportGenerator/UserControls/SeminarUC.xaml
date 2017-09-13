@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ReportGenerator.UserControls.SeminarUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReportGenerator"
+             mc:Ignorable="d" Height="354.545" Width="519.156">
+    <UserControl.DataContext>
+        <local:SeminarViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <DataGrid DataContext="{Binding seminars}" ItemsSource="{Binding}" x:Name="dg" AutoGenerateColumns="False"  RenderTransformOrigin="0.5,0.5" Margin="0,1,1,0" CanUserAddRows="False" Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <DataGrid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.554"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="1.451"/>
+                </TransformGroup>
+            </DataGrid.RenderTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding SeminarName}" Header="Seminar" CanUserReorder="False" CanUserSort="False"/>
+                <DataGridTextColumn Binding="{Binding Type}" Header="Type" CanUserReorder="False" CanUserSort="False"/>
+                <DataGridTextColumn Binding="{Binding Classification}" Header="Classification" CanUserReorder="False" CanUserSort="False"/>
+                <DataGridTextColumn Binding="{Binding Venue}" Header="Venue" CanUserReorder="False" CanUserSort="False"/>
+                <DataGridTextColumn Binding="{Binding Date}" Header="Date" CanUserReorder="False" CanUserSort="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="btnGenerate" Content="Generate Form" Margin="390,323,0,0" Click="btnGenerate_Click" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="4,4,10,10" Panel.ZIndex="1000"/>
+
+    </Grid>
+</UserControl>
