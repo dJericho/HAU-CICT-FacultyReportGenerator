@@ -17,6 +17,7 @@ namespace ReportGenerator
             populateTypes();
             populateClassification();
             populateFaculty();
+            populateRoles();
         }
         private static void populateSeminars()
         {
@@ -88,6 +89,19 @@ namespace ReportGenerator
                                             Undergrad = row["undergrad"].ToString(),
                                             Postgrad = row["postgrad"].ToString(),
                                             RoleId = int.Parse(row["roleid"].ToString())
+                                        }).ToList();
+            sql.closeConnection();
+        }
+        private static void populateRoles()
+        {
+            string query = "select * from roles";
+            sql.openConnection();
+            DataTable dt = sql.getData(query);
+            RoleViewModel.roles = (from DataRow row in dt.Rows
+                                        select new Role
+                                        {   
+                                            Id = int.Parse(row["id"].ToString()),
+                                            RoleName = row["rolename"].ToString()
                                         }).ToList();
             sql.closeConnection();
         }

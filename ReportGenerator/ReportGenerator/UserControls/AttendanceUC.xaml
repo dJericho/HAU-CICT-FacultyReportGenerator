@@ -18,7 +18,14 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <DataGrid DataContext="{Binding Attendance}" ItemsSource="{Binding}">
+                    <DataGrid DataContext="{Binding Attendance}" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ID" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Undergrad}" Header="Undergrad" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Postgrad}" Header="Postgrad" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Role}" Header="Role" CanUserReorder="False" CanUserSort="False"/>
+                        </DataGrid.Columns>
                     </DataGrid>
                 </DataTemplate>
             </TabControl.ContentTemplate>

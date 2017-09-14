@@ -18,6 +18,7 @@ namespace ReportGenerator
         public string Name { get => _name; set => _name = value; }
         public string Undergrad { get => _undergrad; set => _undergrad = value; }
         public string Postgrad { get => _postgrad; set => _postgrad = value; }
+        public String Role { get => RoleViewModel.getRole(RoleId);}
         public int RoleId { get => _roleId; set => _roleId = value; }
     }
 }
