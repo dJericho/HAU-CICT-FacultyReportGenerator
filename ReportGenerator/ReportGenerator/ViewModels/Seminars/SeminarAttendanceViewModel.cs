@@ -9,14 +9,19 @@ namespace ReportGenerator
     class SeminarAttendanceViewModel
     {
         public static List<SeminarAttendance> seminarAttendance { get; set; }
+        public static List<Seminar> seminars { get => SeminarViewModel.seminars; set=> seminars = value; }
 
-        public static int getSeminar(int id)
+        public static Seminar getSeminar(int id)
         {
-            return seminarAttendance.Find(x => x.Seminarid == id).Seminarid;
+            return seminarAttendance.Find(x => x.Seminarid == id).Seminar;
         }
-        public static int getFaculty(int id)
+        public static Faculty getFaculty(int id)
         {
-            return seminarAttendance.Find(x => x.Facultyid == id).Facultyid;
+            return seminarAttendance.Find(x => x.Facultyid == id).Faculty;
+        }
+        public static List<Faculty> getAttendance(int id)
+        {
+            return seminarAttendance.Where(x => x.Seminarid == id).Select(x => x.Faculty).ToList();
         }
     }
 }

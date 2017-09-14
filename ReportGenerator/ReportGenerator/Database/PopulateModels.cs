@@ -16,15 +16,17 @@ namespace ReportGenerator
             populateAttendance();
             populateTypes();
             populateClassification();
+            populateFaculty();
         }
         private static void populateSeminars()
         {
-            string query = "select seminarname, seminartype, classificationid, venue, date from seminars";
+            string query = "select id, seminarname, seminartype, classificationid, venue, date from seminars";
             sql.openConnection();
             DataTable dt = sql.getData(query);
             SeminarViewModel.seminars = (from DataRow row in dt.Rows
                                          select new Seminar
                                          {
+                                             Id = int.Parse(row["id"].ToString()),
                                              SeminarName = row["seminarname"].ToString(),
                                              Typeid = int.Parse(row["seminartype"].ToString()),
                                              Classificationid = int.Parse(row["classificationid"].ToString()),
@@ -71,6 +73,22 @@ namespace ReportGenerator
                                                     Id = int.Parse(row["id"].ToString()),
                                                     Classification = row["classification"].ToString()
                                                 }).ToList();
+            sql.closeConnection();
+        }
+        private static void populateFaculty()
+        {
+            string query = "select * from faculty";
+            sql.openConnection();
+            DataTable dt = sql.getData(query);
+            FacultyViewModel.faculty = (from DataRow row in dt.Rows
+                                        select new Faculty
+                                        {
+                                            Id = int.Parse(row["id"].ToString()),
+                                            Name = row["name"].ToString(),
+                                            Undergrad = row["undergrad"].ToString(),
+                                            Postgrad = row["postgrad"].ToString(),
+                                            RoleId = int.Parse(row["roleid"].ToString())
+                                        }).ToList();
             sql.closeConnection();
         }
     }

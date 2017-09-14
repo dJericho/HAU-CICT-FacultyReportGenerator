@@ -9,5 +9,10 @@ namespace ReportGenerator
     class SeminarViewModel
     {
         public static List<Seminar> seminars { get; set; }
+
+        public static Seminar getSeminar(int id)
+        {
+            return seminars.Find(e => e.Id == id);
+        }
     }
 }

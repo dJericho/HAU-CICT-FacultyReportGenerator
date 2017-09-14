@@ -63,6 +63,7 @@
     </ApplicationDefinition>
     <Compile Include="Database\Connector.cs" />
     <Compile Include="Database\PopulateModels.cs" />
+    <Compile Include="Models\Faculty\Faculty.cs" />
     <Compile Include="Models\Seminars\Seminar.cs" />
     <Compile Include="Models\Seminars\SeminarAttendance.cs" />
     <Compile Include="Models\Seminars\SeminarClassification.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="UserControls\SeminarUC.xaml.cs">
       <DependentUpon>SeminarUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Faculty\FacultyViewModel.cs" />
     <Compile Include="ViewModels\Seminars\SeminarAttendanceViewModel.cs" />
     <Compile Include="ViewModels\Seminars\SeminarClassificationViewModel.cs" />
     <Compile Include="ViewModels\Seminars\SeminarTypeViewModel.cs" />

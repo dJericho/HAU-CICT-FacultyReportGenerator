@@ -15,5 +15,7 @@ namespace ReportGenerator
         public int Id { get => _id; set => _id = value; }
         public int Facultyid { get => _facultyid; set => _facultyid = value; }
         public int Seminarid { get => _seminarid; set => _seminarid = value; }
+        public Seminar Seminar { get => SeminarViewModel.getSeminar(Seminarid); }
+        public Faculty Faculty { get => FacultyViewModel.getFaculty(Facultyid); }
     }
 }

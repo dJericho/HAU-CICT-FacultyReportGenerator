@@ -23,11 +23,13 @@
             <TabItem Header="tab1">
                 <UserControls:SeminarUC Height="Auto" Width="Auto" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             </TabItem>
-            <TabItem Content="" Header="tab2"/>
-            <TabItem Content="" Header="tab3"/>
-            <TabItem Content="" Header="tab4"/>
-            <TabItem Content="" Header="tab5"/>
-            <TabItem Content="" Header="tab6"/>
+            <TabItem Header="tab2">
+                <UserControls:AttendanceUC Height="Auto" Width="Auto" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+            </TabItem>
+            <TabItem Header="tab3"/>
+            <TabItem Header="tab4"/>
+            <TabItem Header="tab5"/>
+            <TabItem Header="tab6"/>
         </TabControl>
     </Grid>
 </Window>

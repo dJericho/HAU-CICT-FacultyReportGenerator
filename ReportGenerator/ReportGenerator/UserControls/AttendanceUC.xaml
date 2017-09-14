@@ -7,13 +7,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.DataContext>
-        <local:SeminarViewModel/>
+        <local:SeminarAttendanceViewModel/>
     </UserControl.DataContext>
     <Grid>
         <TabControl ItemsSource="{Binding seminars}" x:Name="tabAttendance" HorizontalAlignment="Stretch" Width="Auto" Height="Auto" VerticalAlignment="Stretch">
-            <TabItem Content="{Binding SeminarName}"/>
-            <TabItem Content="lul"/>
-
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding SeminarName}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <DataGrid DataContext="{Binding Attendance}" ItemsSource="{Binding}">
+                    </DataGrid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
 
     </Grid>

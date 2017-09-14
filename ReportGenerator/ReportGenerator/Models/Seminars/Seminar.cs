@@ -8,14 +8,19 @@ namespace ReportGenerator
 {
     class Seminar
     {
+        private int _id;
         private string _SeminarName;
         private int _typeid;
         private string _type;
         private int _classificationid;
+        private List<Faculty> _attendance;
         private string _classificiation;
         private string _venue;
         private string _date;
 
+        public int Id{
+            get => _id;
+            set => _id = value; }
         public string SeminarName {
             get => _SeminarName;
             set => _SeminarName = value; }
@@ -37,6 +42,8 @@ namespace ReportGenerator
         public int Classificationid {
             get => _classificationid;
             set => _classificationid = value; }
+        public List<Faculty> Attendance { get => SeminarAttendanceViewModel.getAttendance(Id); set => _attendance = value; }
+
         public string[] getData()
         {
             string[] x =
