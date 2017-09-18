@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ReportGenerator
 {
-    class FacultyViewModel
+    class SubjectViewModel
     {
-        public static BindingList<Faculty> Faculty { get; set; }
+        public static BindingList<Subject> subjects { get; set; }
 
-        public static Faculty getFaculty(int id)
+        public static Subject getSubject(int id)
         {
-            return Faculty.FirstOrDefault(e => e.Id == id);
+            return subjects.FirstOrDefault(x => x.Id == id);
         }
     }
 }

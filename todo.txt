@@ -1,0 +1,55 @@
+ADMIN FORM:
+
+first tab:
+ seminars
+  -table of all seminars  - done
+  -admin: crud
+  -attendance count - to do when faculty is done
+  -button to generate report for every seminar details (print table to excel)
+
+second tab:
+ attendance
+  -tab for each seminar - done
+   -for each tab, admin can see faculty registered in that specific seminar - done
+   -for each tab, admin can crud a faculty that attended the seminar
+   -each tab represents a seperate work sheet
+    -for every worksheet, list all attendees
+
+
+third tab:
+ faculty
+  -table, id-name
+   -click row, display details on another panel (maybe images)
+    -faculty loads(of the teacher).
+   -admin can crud
+   -admin can generate report(list of all faculty)
+
+fourth tab:
+ subjects
+  -list of all subjects - done
+  -admin can crud
+  -admin can generate report(list of all subjects)
+
+fifth tab:
+ faculty loads
+  -list all of it - done
+  -search by subject
+  -report depends on the search
+
+sixth tab:
+ accounts
+  -admin can add faculty
+
+FACULTY FORM
+first tab:
+ your own account
+ -can add subj/seminars attended/change details
+ -faculty can generate their own report subj handled/seminars attended
+
+second tab:
+ seminars attended
+  -show all seminars attended/crud
+
+third tab:
+ subjects handled
+  -show all subjects handled/crud

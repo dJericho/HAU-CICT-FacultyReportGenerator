@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ReportGenerator.UserControls.FacultyUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReportGenerator"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" Width="474.667">
+    <UserControl.DataContext>
+        <local:FacultyViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedFaculty}" CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" DataContext="{Binding Faculty, Mode=TwoWay}" ItemsSource="{Binding}" x:Name="dgFaculty" HorizontalAlignment="Left" Width="245">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="ID" CanUserReorder="False" CanUserSort="False"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" CanUserReorder="False" CanUserSort="False"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add"/>
+                    <MenuItem Header="Edit"/>
+                    <MenuItem Header="Delete" Click="Context_Delete"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+        <DataGrid x:Name="dgLoad" Margin="274,153,0,0"/>
+        <Grid Height="138" Margin="274,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="204">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Faculty ID: " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,10,0,0"/>
+            <Label Grid.Column="0" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2,36,0,0"/>
+            <Label Grid.Column="0" Content="Undergrad:" HorizontalAlignment="Left" Margin="2,62,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Column="0" Content="Postgrad:" HorizontalAlignment="Left" Margin="2,88,0,0" VerticalAlignment="Top"/>
+            <Label Grid.Column="0" Content="Role:" HorizontalAlignment="Left" Margin="2,114,0,-2" VerticalAlignment="Top"/>
+            <TextBox Grid.Column="1" x:Name="txtID" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Margin="0,11,10,0"/>
+            <TextBox Grid.Column="1" x:Name="txtName" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Margin="0,37,8,0"/>
+            <TextBox Grid.Column="1" x:Name="txtUnder" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Margin="0,63,10,0"/>
+            <TextBox Grid.Column="1" x:Name="txtPost" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Margin="0,89,10,0"/>
+            <TextBox Grid.Column="1" x:Name="txtRole" HorizontalAlignment="Stretch" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Margin="0,115,10,0"/>
+        </Grid>
+    </Grid>
+</UserControl>

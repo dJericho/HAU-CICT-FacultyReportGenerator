@@ -9,7 +9,7 @@
         <local:SeminarViewModel/>
     </UserControl.DataContext>
     <Grid>
-        <DataGrid DataContext="{Binding seminars}" ItemsSource="{Binding}" x:Name="dg" AutoGenerateColumns="False"  RenderTransformOrigin="0.5,0.5" Margin="0,1,1,0" CanUserAddRows="False" Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <DataGrid DataContext="{Binding seminars, Mode=TwoWay}" ItemsSource="{Binding}" x:Name="dg" AutoGenerateColumns="False"  RenderTransformOrigin="0.5,0.5" Margin="0,1,1,0" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserAddRows="False" Height="Auto" Width="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <DataGrid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -25,6 +25,14 @@
                 <DataGridTextColumn Binding="{Binding Venue}" Header="Venue" CanUserReorder="False" CanUserSort="False"/>
                 <DataGridTextColumn Binding="{Binding Date}" Header="Date" CanUserReorder="False" CanUserSort="False"/>
             </DataGrid.Columns>
+
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Add"/>
+                    <MenuItem Header="Edit"/>
+                    <MenuItem Header="Delete" Click="Context_Delete"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
         <Button x:Name="btnGenerate" Content="Generate Form" Margin="390,323,0,0" Click="btnGenerate_Click" Style="{DynamicResource MaterialDesignToolButton}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="4,4,10,10" Panel.ZIndex="1000"/>
 

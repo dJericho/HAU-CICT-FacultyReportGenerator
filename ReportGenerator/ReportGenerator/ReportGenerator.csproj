@@ -64,7 +64,9 @@
     <Compile Include="Database\Connector.cs" />
     <Compile Include="Database\PopulateModels.cs" />
     <Compile Include="Models\Faculty\Faculty.cs" />
+    <Compile Include="Models\Faculty\FacultyLoads.cs" />
     <Compile Include="Models\Faculty\Role.cs" />
+    <Compile Include="Models\Faculty\Subject.cs" />
     <Compile Include="Models\Seminars\Seminar.cs" />
     <Compile Include="Models\Seminars\SeminarAttendance.cs" />
     <Compile Include="Models\Seminars\SeminarClassification.cs" />
@@ -72,11 +74,22 @@
     <Compile Include="UserControls\AttendanceUC.xaml.cs">
       <DependentUpon>AttendanceUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\FacultyLoadsUC.xaml.cs">
+      <DependentUpon>FacultyLoadsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\FacultyUC.xaml.cs">
+      <DependentUpon>FacultyUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SeminarUC.xaml.cs">
       <DependentUpon>SeminarUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SubjectsUC.xaml.cs">
+      <DependentUpon>SubjectsUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Faculty\FacultyLoadsViewModel.cs" />
     <Compile Include="ViewModels\Faculty\FacultyViewModel.cs" />
     <Compile Include="ViewModels\Faculty\RoleViewModel.cs" />
+    <Compile Include="ViewModels\Faculty\SubjectViewModel.cs" />
     <Compile Include="ViewModels\Seminars\SeminarAttendanceViewModel.cs" />
     <Compile Include="ViewModels\Seminars\SeminarClassificationViewModel.cs" />
     <Compile Include="ViewModels\Seminars\SeminarTypeViewModel.cs" />
@@ -97,7 +110,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\FacultyLoadsUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\FacultyUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\SeminarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SubjectsUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

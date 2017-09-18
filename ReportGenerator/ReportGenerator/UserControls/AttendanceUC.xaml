@@ -18,14 +18,22 @@
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <DataGrid DataContext="{Binding Attendance}" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                    <DataGrid DataContext="{Binding Attendance}" CanUserResizeColumns="False" ItemsSource="{Binding}" CanUserAddRows="False" AutoGenerateColumns="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="ID" CanUserReorder="False" CanUserSort="False"/>
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" CanUserReorder="False" CanUserSort="False"/>
-                            <DataGridTextColumn Binding="{Binding Undergrad}" Header="Undergrad" CanUserReorder="False" CanUserSort="False"/>
-                            <DataGridTextColumn Binding="{Binding Postgrad}" Header="Postgrad" CanUserReorder="False" CanUserSort="False"/>
-                            <DataGridTextColumn Binding="{Binding Role}" Header="Role" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Id, TargetNullValue='N/A'}" Header="ID" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Name, TargetNullValue='N/A'}" Header="Name" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Undergrad, TargetNullValue='N/A'}" Header="Undergrad" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Postgrad, TargetNullValue='N/A'}" Header="Postgrad" CanUserReorder="False" CanUserSort="False"/>
+                            <DataGridTextColumn Binding="{Binding Role, TargetNullValue='N/A'}" Header="Role" CanUserReorder="False" CanUserSort="False"/>
                         </DataGrid.Columns>
+
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add"/>
+                                <MenuItem Header="Edit"/>
+                                <MenuItem Header="Delete" Click="Context_Delete"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
                     </DataGrid>
                 </DataTemplate>
             </TabControl.ContentTemplate>

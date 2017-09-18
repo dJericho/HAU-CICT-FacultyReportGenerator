@@ -24,3 +24,9 @@ F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGene
 F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\GeneratedInternalTypeHelper.g.cs
 F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\AttendanceUC.g.cs
 F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\AttendanceUC.baml
+F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\FacultyUC.g.cs
+F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\FacultyUC.baml
+F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\SubjectsUC.g.cs
+F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\SubjectsUC.baml
+F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\FacultyLoadsUC.g.cs
+F:\School Folder\OOPL\HAU-CICT-FacultyReportGenerator\ReportGenerator\ReportGenerator\obj\Debug\UserControls\FacultyLoadsUC.baml

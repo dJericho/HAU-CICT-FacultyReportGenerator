@@ -16,19 +16,15 @@ using System.Windows.Shapes;
 namespace ReportGenerator.UserControls
 {
     /// <summary>
-    /// Interaction logic for SeminarUC.xaml
+    /// Interaction logic for FacultyLoadsUC.xaml
     /// </summary>
-    public partial class SeminarUC : UserControl
+    public partial class FacultyLoadsUC : UserControl
     {
-        public SeminarUC()
+        public FacultyLoadsUC()
         {
             InitializeComponent();
         }
 
-        private void btnGenerate_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void Context_Delete(object sender, RoutedEventArgs e)
         {
             var menuItem = (MenuItem)sender;
@@ -41,10 +37,10 @@ namespace ReportGenerator.UserControls
 
             //Get the underlying item, that you cast to your object that is bound
             //to the DataGrid (and has subject and state as property)
-            var toDeleteFromBindedList = (Seminar)item.SelectedCells[0].Item;
+            var toDeleteFromBindedList = (FacultyLoads)item.SelectedCells[0].Item;
 
             //Remove the toDeleteFromBindedList object from your ObservableCollection
-            SeminarAttendanceViewModel.seminars.Remove(toDeleteFromBindedList);
+            FacultyLoadsViewModel.facultyloads.Remove(toDeleteFromBindedList);
         }
     }
 }

@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace ReportGenerator
 {
-    class SeminarAttendance : INotifyPropertyChanged
+    class FacultyLoads : INotifyPropertyChanged
     {
         private int _id;
         private int _facultyid;
-        private int _seminarid;
+        private int _subjectid;
 
         public int Id {
             get => _id;
-            set
-            {
+            set {
                 if(value != _id)
                 {
                     _id = value;
@@ -35,19 +34,19 @@ namespace ReportGenerator
                 }
             }
         }
-        public int Seminarid {
-            get => _seminarid;
+        public int Subjectid {
+            get => _subjectid;
             set
             {
-                if (value != _seminarid)
+                if (value != _subjectid)
                 {
-                    _seminarid = value;
-                    NotifyPropertyChanged("Seminarid");
+                    _subjectid = value;
+                    NotifyPropertyChanged("SubjectID");
                 }
             }
         }
-        public Seminar Seminar { get => SeminarViewModel.getSeminar(Seminarid); }
-        public Faculty Faculty { get => FacultyViewModel.getFaculty(Facultyid); }
+        public Faculty faculty { get => FacultyViewModel.getFaculty(Facultyid); }
+        public Subject subject { get => SubjectViewModel.getSubject(Subjectid); }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

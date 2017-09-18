@@ -26,9 +26,15 @@
             <TabItem Header="tab2">
                 <UserControls:AttendanceUC Height="Auto" Width="Auto" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
             </TabItem>
-            <TabItem Header="tab3"/>
-            <TabItem Header="tab4"/>
-            <TabItem Header="tab5"/>
+            <TabItem Header="tab3">
+                <UserControls:FacultyUC Height="Auto" Width="Auto" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+            </TabItem>
+            <TabItem Header="tab4">
+                <UserControls:SubjectsUC Height="Auto" Width="Auto" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+            </TabItem>
+            <TabItem Header="tab5">
+                <UserControls:FacultyLoadsUC Height="Auto" Width="Auto" Margin="0,0,0,0" VerticalAlignment="Stretch"/>
+            </TabItem>
             <TabItem Header="tab6"/>
         </TabControl>
     </Grid>
