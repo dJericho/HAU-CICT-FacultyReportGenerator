@@ -52,7 +52,7 @@ namespace ReportGenerator
             }
             else if (export.IsSelected)
             {
-                text_Navigation.Text = "Export";
+                GenerateReport.GenerateExcel();
             }
             else if (logout.IsSelected)
             {
