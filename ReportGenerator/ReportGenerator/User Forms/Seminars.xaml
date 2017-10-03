@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="ReportGenerator.Seminars"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ReportGenerator"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Height="auto" Width="auto"
+             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <UserControl.DataContext>
+        <local:AttendanceVM/>
+    </UserControl.DataContext>
+    <Grid>
+        <materialDesign:DialogHost>
+
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+                    <ComboBox ItemsSource="{Binding Seminars}" DisplayMemberPath="seminarName" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="seminarCB" materialDesign:HintAssist.Hint="Seminar Name"/>
+                    <ComboBox ItemsSource="{Binding classifications}" DisplayMemberPath="classification" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="classCB" materialDesign:HintAssist.Hint="Seminar Classification" />
+                    <ComboBox ItemsSource="{Binding types}" DisplayMemberPath="type" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="typeCB" materialDesign:HintAssist.Hint="Seminar Type" />
+                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="venueTB" materialDesign:HintAssist.Hint="Venue" />
+                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="dateTB" materialDesign:HintAssist.Hint="Date" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="Accept" Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                                Click="Accept_Click">
+                            ADD
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                            CANCEL
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+            </materialDesign:DialogHost.DialogContent>
+
+            <materialDesign:Card Margin="5,5,5,5" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto">
+                <Grid>
+                    <DataGrid x:Name="dg" CanUserAddRows="False" CanUserReorderColumns="False" DataContext="{Binding specificAttendances}" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding seminar.id}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding seminar.seminarName}" Header="Seminar"/>
+                            <DataGridTextColumn Binding="{Binding seminar.type.type}" Header="Type"/>
+                            <DataGridTextColumn Binding="{Binding seminar.classification.classification}" Header="Classification"/>
+                            <DataGridTextColumn Binding="{Binding seminar.venue}" Header="Venue"/>
+                            <DataGridTextColumn Binding="{Binding seminar.date}" Header="Date"/>
+                            <!--<DataGridTextColumn Binding="{Binding faculty.name}" Header="Faculty"/>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                         PlacementMode="TopAndAlignCentres" Width="45" Height="44"
+                                         ToolTipService.Placement="Right" Margin="0,0,10,10"
+                                         HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                        <StackPanel>
+                            <Button x:Name="btnAdd" Click="btnAdd_Click" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Add" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                                <materialDesign:PackIcon Kind="LibraryPlus" Width="20" Height="20"/>
+                            </Button>
+                            <Button x:Name="btnEdit" Click="btnEdit_Click" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Edit" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                                <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
+                            </Button>
+                            <Button x:Name="btnDelete" Click="btnDelete_Click" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Delete" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                                <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </Grid>
+            </materialDesign:Card>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>

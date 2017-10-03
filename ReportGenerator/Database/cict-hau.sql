@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2017 at 12:02 AM
+-- Generation Time: Oct 02, 2017 at 02:04 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -52,7 +52,10 @@ CREATE TABLE `faculty` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `undergrad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `undergradYear` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `postgrad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postgradYear` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expectedDate` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `roleId` int(10) UNSIGNED NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -61,9 +64,9 @@ CREATE TABLE `faculty` (
 -- Dumping data for table `faculty`
 --
 
-INSERT INTO `faculty` (`id`, `name`, `undergrad`, `postgrad`, `roleId`, `password`) VALUES
-(1, 'Joshua Jimenez', 'BS Computer Science, HAU', 'Master of Computer Science, HAU', 1, 'secret'),
-(2, 'Jericho Diaz', 'BS Computer Science, HAU', '', 2, 'secret');
+INSERT INTO `faculty` (`id`, `name`, `undergrad`, `undergradYear`, `postgrad`, `postgradYear`, `expectedDate`, `roleId`, `password`) VALUES
+(1, 'Joshua Jimenez', 'BS Computer Science, HAU', '2011', 'Master of Computer Science, HAU', '2015', NULL, 1, 'secret'),
+(2, 'Jericho Diaz', 'BS Computer Science, HAU', '2011', '', '2015', NULL, 2, 'secret');
 
 -- --------------------------------------------------------
 
@@ -271,7 +274,7 @@ ALTER TABLE `faculty`
 -- AUTO_INCREMENT for table `facultyloads`
 --
 ALTER TABLE `facultyloads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `roles`
 --
