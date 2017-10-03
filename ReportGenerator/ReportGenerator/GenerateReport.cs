@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace ReportGenerator
 {
@@ -156,7 +157,13 @@ namespace ReportGenerator
 
             ws.Columns.AutoFit();
 
-            wb.SaveAs(@"Excel.xlsx");
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.DefaultExt = ".xlsx";
+            dlg.Filter = "Excel Files|*.xlsx";
+            bool? result = dlg.ShowDialog();
+            if(result == true)
+                wb.SaveAs(dlg.FileName);
+
             wb.Close();
             xl.Quit();
             Marshal.ReleaseComObject(xl);
