@@ -22,11 +22,13 @@ namespace ReportGenerator
     {
         public MainWindow()
         {
-            PopulateModels.populate();
-            AttendanceVM.setSpecificFaculty(1);
-            LoadsVM.setLoads(1);
-            CurrentUser.user = FacultyVM.getFaculty(1);
             InitializeComponent();
+
+            if(CurrentUser.user.roleID == 2)
+            {
+                Accounts.Visibility = Visibility.Collapsed;
+                iconAccounts.Visibility = Visibility.Collapsed;
+            }
         }
         private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -51,6 +53,16 @@ namespace ReportGenerator
             else if (export.IsSelected)
             {
                 text_Navigation.Text = "Export";
+            }
+            else if (logout.IsSelected)
+            {
+                new Login().Show();
+                Close();
+            }
+            else if (Accounts.IsSelected)
+            {
+                dockPanel.Children.Add(new Accounts());
+                text_Navigation.Text = "Accounts";
             }
         }
     }

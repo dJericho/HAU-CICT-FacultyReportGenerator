@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="ReportGenerator.Accounts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ReportGenerator"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <local:FacultyVM/>
+    </UserControl.DataContext>
+    <Grid>
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <StackPanel Margin="16">
+                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="name" materialDesign:HintAssist.Hint="Name"/>
+                    <ComboBox ItemsSource="{Binding roles}" DisplayMemberPath="roleName" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="role" materialDesign:HintAssist.Hint="Role" />
+                    <PasswordBox HorizontalAlignment="Stretch" x:Name="password" Margin="0 8 0 0" materialDesign:HintAssist.Hint="Password"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="Accept" Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                                Click="Accept_Click">
+                            ADD
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                            CANCEL
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+            </materialDesign:DialogHost.DialogContent>
+
+            <materialDesign:Card Margin="5,5,5,5" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto">
+                <Grid>
+                    <DataGrid x:Name="dg" CanUserAddRows="False" CanUserReorderColumns="False" DataContext="{Binding faculty}" ItemsSource="{Binding}" AutoGenerateColumns="False" HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding name}" Header="Name"/>
+                            <DataGridTextColumn Binding="{Binding Role.role}" Header="Role"/>
+                            <DataGridTextColumn Binding="{Binding undergrad}" Header="Undergrad"/>
+                            <DataGridTextColumn Binding="{Binding undergradYear}" Header="Year"/>
+                            <DataGridTextColumn Binding="{Binding postgrad}" Header="Postgrad"/>
+                            <DataGridTextColumn Binding="{Binding postgradYear}" Header="Year"/>
+                            <DataGridTextColumn Binding="{Binding postgradExpectedYear}" Header="Expected Year"/>
+                            <!--<DataGridTextColumn Binding="{Binding faculty.name}" Header="Faculty"/>-->
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                         PlacementMode="TopAndAlignCentres" Width="45" Height="44"
+                                         ToolTipService.Placement="Right" Margin="0,0,10,10"
+                                         HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                        <StackPanel>
+                            <Button x:Name="btnAdd" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Add" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                                <materialDesign:PackIcon Kind="LibraryPlus" Width="20" Height="20"/>
+                            </Button>
+                            <Button x:Name="btnDelete" Click="btnDelete_Click" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Delete" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                                <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </Grid>
+            </materialDesign:Card>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>

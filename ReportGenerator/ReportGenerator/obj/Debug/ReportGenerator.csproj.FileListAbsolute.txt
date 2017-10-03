@@ -28,3 +28,7 @@ F:\School Folder\OOPL\ReportGenerator\ReportGenerator\bin\Debug\MySql.Data.dll
 F:\School Folder\OOPL\ReportGenerator\ReportGenerator\bin\Debug\MySql.Data.xml
 F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\test.g.cs
 F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\test.baml
+F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\Login.g.cs
+F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\Login.baml
+F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\User Forms\Accounts.g.cs
+F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\User Forms\Accounts.baml

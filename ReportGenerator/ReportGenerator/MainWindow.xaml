@@ -35,12 +35,14 @@
                                 <materialDesign:PackIcon Width="25" Height="25" Kind="ProjectorScreen" Margin="10 35 0 0"/>
                                 <materialDesign:PackIcon Width="25" Height="25" Kind="FileExcel" Margin="10 20 0 0" />
                                 <materialDesign:PackIcon Width="25" Height="25" Kind="ExitToApp" Margin="10 20 0 0"/>
+                                <materialDesign:PackIcon x:Name="iconAccounts" Width="25" Height="25" Kind="AccountMultiple" Margin="10 20 0 0"/>
                             </StackPanel>
                             <ListBox FontSize="24" FontWeight="Light" x:Name="DemoItemsListBox" Margin="0 10 0 16" SelectedIndex="0" PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp" SelectionChanged="DemoItemsListBox_SelectionChanged">
                                 <ListBoxItem Content="      Profile &amp;&#10;      Subjects" x:Name="profile" Margin="0 0 0 0" />
                                 <ListBoxItem Content="      Seminars" x:Name="seminar" />
                                 <ListBoxItem Content="      Export" x:Name="export"/>
                                 <ListBoxItem Content="      Logout" x:Name="logout"/>
+                                <ListBoxItem Content="      Accounts" x:Name="Accounts"/>
                             </ListBox>
 
                         </Grid>

@@ -10,6 +10,7 @@ namespace ReportGenerator
     class FacultyVM
     {
         public static BindingList<Faculty> faculty { get; set; }
+        public static BindingList<Role> roles { get => RoleVM.Roles; }
 
         public static Faculty getFaculty(int id)
         {

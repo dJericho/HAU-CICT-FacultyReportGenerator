@@ -106,5 +106,28 @@ namespace ReportGenerator
                 return false;
             }
         }
+        public bool login(string name, string pass)
+        {
+            string query = String.Format("select id, password from faculty where " +
+                "id like '{0}' and password like '{1}';", name, pass);
+            Console.WriteLine(query);
+            openConnection();
+            MySqlCommand cmd = new MySqlCommand(query, dbConnect);
+            using (MySqlDataReader read = cmd.ExecuteReader())
+            {
+                while (read.Read())
+                {
+                    if (read.GetString(0) != null && read.GetString(1) != null)
+                    {
+                        CurrentUser.user = FacultyVM.getFaculty(read.GetInt32(0));
+                        closeConnection();
+                        return true;
+                    }
+                }
+            }
+            closeConnection();
+            return false;
+
+        }
     }
 }

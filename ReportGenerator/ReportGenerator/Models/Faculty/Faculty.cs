@@ -11,9 +11,9 @@ namespace ReportGenerator
         public int id { get; set; }
         public string name { get; set; }
         public string undergrad { get; set; }
-        public int undergradYear { get; set; }
+        public string undergradYear { get; set; }
         public string postgrad { get; set; }
-        public int postgradYear { get; set; }
+        public string postgradYear { get; set; }
         public string postgradExpectedYear { get; set; }
         public int roleID { get; set; }
         public Role role { get => RoleVM.getRole(roleID); }

@@ -90,9 +90,9 @@ namespace ReportGenerator
                                                                      id = int.Parse(row["id"].ToString()),
                                                                      name = row["name"].ToString(),
                                                                      undergrad = row["undergrad"].ToString(),
-                                                                     undergradYear = int.Parse(row["undergradYear"].ToString()),
+                                                                     undergradYear = row["undergradYear"].ToString(),
                                                                      postgrad = row["postgrad"].ToString(),
-                                                                     postgradYear = int.Parse(row["postgradYear"].ToString()),
+                                                                     postgradYear = row["postgradYear"].ToString(),
                                                                      postgradExpectedYear = row["expectedDate"].ToString(),
                                                                      roleID = int.Parse(row["roleId"].ToString())
                                                                  }).ToList());

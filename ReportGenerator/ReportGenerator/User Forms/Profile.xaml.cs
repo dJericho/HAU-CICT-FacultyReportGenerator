@@ -26,7 +26,7 @@ namespace ReportGenerator
             InitializeComponent();
             List<string> list = new List<string>();
             list.Add("");
-            for (int i = 1970; i < DateTime.Now.AddYears(5).Year; i++)
+            for (int i = 1970; i < DateTime.Now.Year; i++)
             {
                 list.Add(i+"");
             }
@@ -55,18 +55,12 @@ namespace ReportGenerator
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            if (Accept.Content.ToString() == "ADD")
-                addData();
-            else if (Accept.Content.ToString() == "EDIT")
-                editData();
-            subjectTB.Text = "";
-            typeCB.Text = "";
+        { 
+            Accept.Content = "ADD";
         }
 
         private void addData()
         {
-            Accept.Content = "ADD";
             string query;
             Connector db = new Connector();
             if (SubjectVM.getSubject(subjectTB.Text) == null)
@@ -161,11 +155,21 @@ namespace ReportGenerator
             {
                 FacultyVM.getFaculty(CurrentUser.user.id).name = name.Text;
                 FacultyVM.getFaculty(CurrentUser.user.id).undergrad = undergrad.Text;
-                FacultyVM.getFaculty(CurrentUser.user.id).undergradYear = int.Parse(yearUnder.Text);
+                FacultyVM.getFaculty(CurrentUser.user.id).undergradYear = yearUnder.Text;
                 FacultyVM.getFaculty(CurrentUser.user.id).postgrad = postgrad.Text;
-                FacultyVM.getFaculty(CurrentUser.user.id).postgradYear = int.Parse(yearPost.Text);
+                FacultyVM.getFaculty(CurrentUser.user.id).postgradYear = yearPost.Text;
                 FacultyVM.getFaculty(CurrentUser.user.id).postgradExpectedYear = yearExpected.Text;
             }
+        }
+
+        private void Accept_Click(object sender, RoutedEventArgs e)
+        {
+            if (Accept.Content.ToString() == "ADD")
+                addData();
+            else if (Accept.Content.ToString() == "EDIT")
+                editData();
+            subjectTB.Text = "";
+            typeCB.Text = "";
         }
     }
 }
