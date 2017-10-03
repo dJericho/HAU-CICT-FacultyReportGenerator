@@ -92,8 +92,8 @@ namespace ReportGenerator
 
             ws.Columns.AutoFit();
 
-            //ws = wb.Sheets.Add();
-            ws = (Worksheet)wb.Worksheets[2];
+            ws = wb.Worksheets.Add();
+            //var ws2 = (Worksheet)wb.Worksheets[2];
             ws.Name = "Subjects";
 
             ws.Cells[3, 2] = "Name";
