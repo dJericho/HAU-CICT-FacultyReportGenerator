@@ -106,9 +106,9 @@ namespace ReportGenerator
             ws.Cells[5, 6] = CurrentUser.user.undergradYear;
             ws.Cells[4, 8] = CurrentUser.user.postgradExpectedYear;
 
-            ws.Range[ws.Cells[7, 3], ws.Cells[7, 7]].Merge();
-            ws.Cells[7, 3] = "COURSE";
-            ws.Cells[8, 2] = "Subject";
+            ws.Range[ws.Cells[7, 5], ws.Cells[7, 9]].Merge();
+            ws.Cells[7, 5] = "COURSE";
+            ws.Cells[8, 3] = "Subject";
             i = 0;
             foreach (Classification x in ClassificationVM.Classifications)
             {
@@ -156,7 +156,7 @@ namespace ReportGenerator
 
             ws.Columns.AutoFit();
 
-            wb.SaveAs(@"F:\School Folder\OOPL\Excel.xlsx");
+            wb.SaveAs(@"Excel.xlsx");
             wb.Close();
             xl.Quit();
             Marshal.ReleaseComObject(xl);

@@ -17,10 +17,10 @@
 
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <ComboBox ItemsSource="{Binding Seminars}" DisplayMemberPath="seminarName" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="seminarCB" materialDesign:HintAssist.Hint="Seminar Name"/>
+                    <ComboBox SelectionChanged="seminarCB_SelectionChanged" ItemsSource="{Binding Seminars}" DisplayMemberPath="seminarName" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="seminarCB" materialDesign:HintAssist.Hint="Seminar Name"/>
                     <ComboBox ItemsSource="{Binding classifications}" DisplayMemberPath="classification" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="classCB" materialDesign:HintAssist.Hint="Seminar Classification" />
                     <ComboBox ItemsSource="{Binding types}" DisplayMemberPath="type" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="typeCB" materialDesign:HintAssist.Hint="Seminar Type" />
-                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="venueTB" materialDesign:HintAssist.Hint="Venue" />
+                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="venueTB" materialDesign:HintAssist.Hint="Venue"/>
                     <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="dateTB" materialDesign:HintAssist.Hint="Date" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="Accept" Style="{StaticResource MaterialDesignFlatButton}"
@@ -33,7 +33,8 @@
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsCancel="True"
                                         Margin="0 8 8 0"
-                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                                Click="Button_Click">
                             CANCEL
                         </Button>
                     </StackPanel>

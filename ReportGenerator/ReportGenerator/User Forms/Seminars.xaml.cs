@@ -27,15 +27,25 @@ namespace ReportGenerator
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            if (Accept.Content.ToString() == "ADD")
-                addData();
-            else if (Accept.Content.ToString() == "EDIT")
-                editData();
+            if (classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
+                dateTB.Text != "" && venueTB.Text != "")
+            {
+                if (Accept.Content.ToString() == "ADD")
+                    addData();
+                else if (Accept.Content.ToString() == "EDIT")
+                    editData();
+            }
+            else
+                MessageBox.Show("Empty Fields");
             classCB.Text = "";
             seminarCB.Text = "";
             typeCB.Text = "";
             dateTB.Text = "";
             venueTB.Text = "";
+            classCB.IsEnabled = true;
+            typeCB.IsEnabled = true;
+            dateTB.IsEnabled = true;
+            venueTB.IsEnabled = true;
         }
 
         private void addData()
@@ -138,6 +148,36 @@ namespace ReportGenerator
                 db.deleteData(query);
                 AttendanceVM.specificAttendances.Remove((Attendance)dg.SelectedItem);
             }
+        }
+
+        private void seminarCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                classCB.Text = (e.AddedItems[0] as Seminar).classification.classification;
+                typeCB.Text = (e.AddedItems[0] as Seminar).type.type;
+                dateTB.Text = (e.AddedItems[0] as Seminar).date;
+                venueTB.Text = (e.AddedItems[0] as Seminar).venue;
+
+                classCB.IsEnabled = false;
+                typeCB.IsEnabled = false;
+                dateTB.IsEnabled = false;
+                venueTB.IsEnabled = false;
+            }
+            catch(Exception ex) { }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            classCB.Text = "";
+            seminarCB.Text = "";
+            typeCB.Text = "";
+            dateTB.Text = "";
+            venueTB.Text = "";
+            classCB.IsEnabled = true;
+            typeCB.IsEnabled = true;
+            dateTB.IsEnabled = true;
+            venueTB.IsEnabled = true;
         }
     }
 }

@@ -113,6 +113,7 @@ namespace ReportGenerator
             try
             {
                 typeCB.Text = (e.AddedItems[0] as Subject).classification.classification;
+                typeCB.IsEnabled = false;
                 //typeCB.Text = SubjectVM.getSubject(text).classification.classification;
             }
             catch(Exception ex)
@@ -164,12 +165,25 @@ namespace ReportGenerator
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
-            if (Accept.Content.ToString() == "ADD")
-                addData();
-            else if (Accept.Content.ToString() == "EDIT")
-                editData();
+            if (subjectTB.Text != "" && typeCB.Text != "")
+            {
+                if (Accept.Content.ToString() == "ADD")
+                    addData();
+                else if (Accept.Content.ToString() == "EDIT")
+                    editData();
+            }
+            else
+                MessageBox.Show("Empty Fields");
             subjectTB.Text = "";
             typeCB.Text = "";
+            typeCB.IsEnabled = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            subjectTB.Text = "";
+            typeCB.Text = "";
+            typeCB.IsEnabled = true;
         }
     }
 }
