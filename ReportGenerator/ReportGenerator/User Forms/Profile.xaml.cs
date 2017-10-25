@@ -118,7 +118,7 @@ namespace ReportGenerator
             }
             catch(Exception ex)
             {
-
+                typeCB.IsEnabled = true;
             }
         }
 

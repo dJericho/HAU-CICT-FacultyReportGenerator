@@ -164,7 +164,12 @@ namespace ReportGenerator
                 dateTB.IsEnabled = false;
                 venueTB.IsEnabled = false;
             }
-            catch(Exception ex) { }
+            catch(Exception ex) {
+                classCB.IsEnabled = true;
+                typeCB.IsEnabled = true;
+                dateTB.IsEnabled = true;
+                venueTB.IsEnabled = true;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
