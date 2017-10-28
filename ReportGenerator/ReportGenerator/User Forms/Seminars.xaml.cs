@@ -35,6 +35,8 @@ namespace ReportGenerator
                 else if (Accept.Content.ToString() == "EDIT")
                     editData();
             }
+            else if (Accept.Content.ToString() == "YES")
+                deleteData();
             else
                 MessageBox.Show("Empty Fields");
             classCB.Text = "";
@@ -123,11 +125,13 @@ namespace ReportGenerator
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            createPrompt();
             Accept.Content = "ADD";
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            createPrompt();
             Accept.Content = "EDIT";
             if(dg.SelectedItem != null)
             {
@@ -141,7 +145,12 @@ namespace ReportGenerator
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if(dg.SelectedItem != null)
+            deletePrompt();
+        }
+
+        private void deleteData()
+        {
+            if (dg.SelectedItem != null)
             {
                 Connector db = new Connector();
                 string query = "delete from seminarsattendance where id = " + ((Attendance)dg.SelectedItem).id;
@@ -183,6 +192,28 @@ namespace ReportGenerator
             typeCB.IsEnabled = true;
             dateTB.IsEnabled = true;
             venueTB.IsEnabled = true;
+        }
+
+        private void deletePrompt()
+        {
+            delete.Content = String.Format("Are you sure you want to delete {0}?", ((Attendance)dg.SelectedItem).seminar.seminarName);
+            Accept.Content = "YES";
+
+            classCB.Visibility = Visibility.Collapsed;
+            seminarCB.Visibility = Visibility.Collapsed;
+            typeCB.Visibility = Visibility.Collapsed;
+            dateTB.Visibility = Visibility.Collapsed;
+            venueTB.Visibility = Visibility.Collapsed;
+            delete.Visibility = Visibility.Visible;
+        }
+        private void createPrompt()
+        {
+            classCB.Visibility = Visibility.Visible;
+            seminarCB.Visibility = Visibility.Visible;
+            typeCB.Visibility = Visibility.Visible;
+            dateTB.Visibility = Visibility.Visible;
+            venueTB.Visibility = Visibility.Visible;
+            delete.Visibility = Visibility.Collapsed;
         }
     }
 }

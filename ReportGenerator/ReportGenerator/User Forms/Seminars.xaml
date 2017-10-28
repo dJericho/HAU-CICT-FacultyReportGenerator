@@ -13,7 +13,7 @@
         <local:AttendanceVM/>
     </UserControl.DataContext>
     <Grid>
-        <materialDesign:DialogHost>
+        <materialDesign:DialogHost Identifier="add">
 
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
@@ -22,6 +22,7 @@
                     <ComboBox ItemsSource="{Binding types}" DisplayMemberPath="type" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="typeCB" materialDesign:HintAssist.Hint="Seminar Type" />
                     <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="venueTB" materialDesign:HintAssist.Hint="Venue"/>
                     <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="dateTB" materialDesign:HintAssist.Hint="Date" />
+                    <Label Content="Test" x:Name="delete"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button x:Name="Accept" Style="{StaticResource MaterialDesignFlatButton}"
                                         IsDefault="True"
@@ -67,7 +68,7 @@
                             <Button x:Name="btnEdit" Click="btnEdit_Click" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Edit" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
                                 <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
                             </Button>
-                            <Button x:Name="btnDelete" Click="btnDelete_Click" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Delete" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                            <Button x:Name="btnDelete" Click="btnDelete_Click" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Delete" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
                                 <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
                             </Button>
                         </StackPanel>
