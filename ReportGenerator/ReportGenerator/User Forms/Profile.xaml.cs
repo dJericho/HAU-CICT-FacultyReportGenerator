@@ -117,8 +117,13 @@ namespace ReportGenerator
         {
             try
             {
-                typeCB.Text = (e.AddedItems[0] as Subject).classification.classification;
-                typeCB.IsEnabled = false;
+                if (Accept.Content.ToString() == "ADD")
+                {
+                    typeCB.Text = (e.AddedItems[0] as Subject).classification.classification;
+                    typeCB.IsEnabled = false;
+                }
+                else
+                    typeCB.IsEnabled = true;
                 //typeCB.Text = SubjectVM.getSubject(text).classification.classification;
             }
             catch(Exception ex)
@@ -132,9 +137,9 @@ namespace ReportGenerator
             createPrompt();
             if (dg.SelectedItem != null)
             {
+                Accept.Content = "EDIT";
                 typeCB.Text = ((FacultyLoads)dg.SelectedItem).subject.classification.classification;
                 subjectTB.Text = ((FacultyLoads)dg.SelectedItem).subject.name;
-                Accept.Content = "EDIT";
             }
         }
 
@@ -175,13 +180,6 @@ namespace ReportGenerator
                 deleteData();
             else if (!(subjectTB.Text != "" && typeCB.Text != ""))
                 emptyPrompt();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            subjectTB.Text = "";
-            typeCB.Text = "";
-            typeCB.IsEnabled = true;
         }
 
 

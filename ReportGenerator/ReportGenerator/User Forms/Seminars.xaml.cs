@@ -164,15 +164,25 @@ namespace ReportGenerator
         {
             try
             {
-                classCB.Text = (e.AddedItems[0] as Seminar).classification.classification;
-                typeCB.Text = (e.AddedItems[0] as Seminar).type.type;
-                dateTB.Text = (e.AddedItems[0] as Seminar).date;
-                venueTB.Text = (e.AddedItems[0] as Seminar).venue;
+                if (Accept.Content.ToString() == "ADD")
+                {
+                    classCB.Text = (e.AddedItems[0] as Seminar).classification.classification;
+                    typeCB.Text = (e.AddedItems[0] as Seminar).type.type;
+                    dateTB.Text = (e.AddedItems[0] as Seminar).date;
+                    venueTB.Text = (e.AddedItems[0] as Seminar).venue;
 
-                classCB.IsEnabled = false;
-                typeCB.IsEnabled = false;
-                dateTB.IsEnabled = false;
-                venueTB.IsEnabled = false;
+                    classCB.IsEnabled = false;
+                    typeCB.IsEnabled = false;
+                    dateTB.IsEnabled = false;
+                    venueTB.IsEnabled = false;
+                }
+                else
+                {
+                    classCB.IsEnabled = true;
+                    typeCB.IsEnabled = true;
+                    dateTB.IsEnabled = true;
+                    venueTB.IsEnabled = true;
+                }
             }
             catch(Exception ex) {
                 classCB.IsEnabled = true;
@@ -181,19 +191,7 @@ namespace ReportGenerator
                 venueTB.IsEnabled = true;
             }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            classCB.Text = "";
-            seminarCB.Text = "";
-            typeCB.Text = "";
-            dateTB.Text = "";
-            venueTB.Text = "";
-            classCB.IsEnabled = true;
-            typeCB.IsEnabled = true;
-            dateTB.IsEnabled = true;
-            venueTB.IsEnabled = true;
-        }
+        
 
         private void deletePrompt()
         {
