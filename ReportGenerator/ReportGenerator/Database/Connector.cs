@@ -68,7 +68,7 @@ namespace ReportGenerator
 
             return ds;
         }
-        public bool addData(string query)
+        public long addData(string query)
         {
             try
             {
@@ -80,12 +80,12 @@ namespace ReportGenerator
                 read.Close();
                 closeConnection();
                 //cmd.ExecuteNonQuery();
-                return true;
+                return cmd.LastInsertedId;
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.StackTrace);
-                return false;
+                return -1;
             }
         }
         public bool deleteData(string query)

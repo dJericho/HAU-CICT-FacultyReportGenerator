@@ -36,5 +36,3 @@ F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\Interop.Microsof
 F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\Interop.Microsoft.Office.Interop.Excel.dll
 F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\Interop.VBIDE.dll
 F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\ReportGenerator.csproj.ResolveComReference.cache
-F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\User Forms\test.g.cs
-F:\School Folder\OOPL\ReportGenerator\ReportGenerator\obj\Debug\User Forms\test.baml

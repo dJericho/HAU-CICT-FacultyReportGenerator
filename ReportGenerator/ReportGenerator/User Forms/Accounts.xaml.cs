@@ -43,11 +43,12 @@ namespace ReportGenerator
                 "'{0}', {1}, '{2}');", name.Text,
                 RoleVM.getRole(role.Text).id, password.Password);
             Connector db = new Connector();
-            if (db.addData(query))
+            long lastid = db.addData(query);
+            if (lastid != -1)
             {
                 FacultyVM.faculty.Add(new Faculty
                 {
-                    id = FacultyVM.faculty.Max(x => x.id) + 1,
+                    id = (int)lastid,
                     name = name.Text,
                     roleID = RoleVM.getRole(role.Text).id
                 });

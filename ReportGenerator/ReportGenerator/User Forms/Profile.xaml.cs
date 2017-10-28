@@ -55,12 +55,14 @@ namespace ReportGenerator
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
-        { 
+        {
+            createPrompt();
             Accept.Content = "ADD";
         }
 
         private void addData()
         {
+            long lastid;
             string query;
             Connector db = new Connector();
             if (SubjectVM.getSubject(subjectTB.Text) == null)
@@ -68,12 +70,13 @@ namespace ReportGenerator
                 query = String.Format("insert into subjects ( name, classificationID) values (" +
                     "'{0}', {1})", subjectTB.Text,
                     ClassificationVM.getClassification(typeCB.Text).id);
-                if (db.addData(query))
+                lastid = db.addData(query);
+                if (lastid != -1)
                 {
 
                     SubjectVM.Subjects.Add(new Subject
                     {
-                        id = SubjectVM.Subjects.Max(x => x.id) + 1,
+                        id = (int)lastid,
                         name = subjectTB.Text,
                         classID = ClassificationVM.getClassification(typeCB.Text).id
                     });
@@ -81,12 +84,14 @@ namespace ReportGenerator
             }
             query = String.Format("insert into facultyloads (facultyId, subjectId) values (" +
                     "{0}, {1});", CurrentUser.user.id, SubjectVM.getSubject(subjectTB.Text).id);
-            if (db.addData(query))
+
+            lastid = db.addData(query);
+            if (lastid != -1)
             {
                 //Console.WriteLine(query);
                 LoadsVM.specificLoads.Add(new FacultyLoads
                 {
-                    id = LoadsVM.Loads.Max(x => x.id) + 1,
+                    id = (int)lastid,
                     facultyID = CurrentUser.user.id,
                     subjectID = SubjectVM.getSubject(subjectTB.Text).id
                 });
@@ -99,7 +104,7 @@ namespace ReportGenerator
             string query = String.Format("update subjects set " +
                 "name = '{0}', classificationID = {1} where id = {2};", subjectTB.Text, ClassificationVM.getClassification(typeCB.Text).id, 
                 ((FacultyLoads)dg.SelectedItem).subjectID);
-            if (db.addData(query))
+            if (db.addData(query) != -1)
             {
                 SubjectVM.getSubject(((FacultyLoads)dg.SelectedItem).subjectID).name = subjectTB.Text;
                 SubjectVM.getSubject(((FacultyLoads)dg.SelectedItem).subjectID).classID = ClassificationVM.getClassification(typeCB.Text).id;
@@ -124,6 +129,7 @@ namespace ReportGenerator
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            createPrompt();
             if (dg.SelectedItem != null)
             {
                 typeCB.Text = ((FacultyLoads)dg.SelectedItem).subject.classification.classification;
@@ -134,14 +140,7 @@ namespace ReportGenerator
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (dg.SelectedItem != null)
-            {
-                Connector db = new Connector();
-                string query = "delete from facultyloads where id = " + ((FacultyLoads)dg.SelectedItem).id;
-                Console.WriteLine(query);
-                db.deleteData(query);
-                LoadsVM.specificLoads.Remove((FacultyLoads)dg.SelectedItem);
-            }
+            deletePrompt();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -152,7 +151,7 @@ namespace ReportGenerator
                 name.Text, undergrad.Text, yearUnder.Text, postgrad.Text, yearPost.Text, yearExpected.Text,
                 CurrentUser.user.id);
             Connector db = new Connector();
-            if (db.addData(query))
+            if (db.addData(query) != -1)
             {
                 FacultyVM.getFaculty(CurrentUser.user.id).name = name.Text;
                 FacultyVM.getFaculty(CurrentUser.user.id).undergrad = undergrad.Text;
@@ -172,11 +171,10 @@ namespace ReportGenerator
                 else if (Accept.Content.ToString() == "EDIT")
                     editData();
             }
-            else
-                MessageBox.Show("Empty Fields");
-            subjectTB.Text = "";
-            typeCB.Text = "";
-            typeCB.IsEnabled = true;
+            else if (Accept.Content.ToString() == "YES")
+                deleteData();
+            else if (!(subjectTB.Text != "" && typeCB.Text != ""))
+                emptyPrompt();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -184,6 +182,61 @@ namespace ReportGenerator
             subjectTB.Text = "";
             typeCB.Text = "";
             typeCB.IsEnabled = true;
+        }
+
+
+        private void emptyPrompt()
+        {
+            delete.Content = "Please fill out all fields";
+            delete.Visibility = Visibility.Visible;
+        }
+        private void deletePrompt()
+        {
+            try
+            {
+                delete.Content = String.Format("Are you sure you want to delete {0}?", ((FacultyLoads)dg.SelectedItem).subject.name);
+                Accept.Content = "YES";
+            }
+            catch(Exception e)
+            {
+                delete.Content = "No row selected.";
+                Accept.Content = "OK";
+            }
+            typeCB.Visibility = Visibility.Collapsed;
+            subjectTB.Visibility = Visibility.Collapsed;
+            delete.Visibility = Visibility.Visible;
+        }
+
+        private void createPrompt()
+        {
+            typeCB.Visibility = Visibility.Visible;
+            subjectTB.Visibility = Visibility.Visible;
+            delete.Visibility = Visibility.Collapsed;
+        }
+        private void deleteData()
+        {
+
+            if (dg.SelectedItem != null)
+            {
+                Connector db = new Connector();
+                string query = "delete from facultyloads where id = " + ((FacultyLoads)dg.SelectedItem).id;
+                Console.WriteLine(query);
+                db.deleteData(query);
+                LoadsVM.specificLoads.Remove((FacultyLoads)dg.SelectedItem);
+            }
+
+        }
+
+        private void DialogHost_DialogClosing(object sender, DialogClosingEventArgs eventArgs)
+        {
+            if (!(subjectTB.Text != "" && typeCB.Text != "") && typeCB.Visibility == Visibility.Visible)
+                eventArgs.Cancel();
+            else
+            {
+                subjectTB.Text = "";
+                typeCB.Text = "";
+                typeCB.IsEnabled = true;
+            }
         }
     }
 }

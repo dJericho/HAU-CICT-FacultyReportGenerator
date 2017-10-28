@@ -32,12 +32,13 @@
                 <Label Content="Profile" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,3,0,0" FontWeight="Bold" FontSize="10"/>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:DialogHost>
+        <materialDesign:DialogHost DialogClosing="DialogHost_DialogClosing">
 
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <ComboBox SelectionChanged="subjectTB_SelectionChanged" ItemsSource="{Binding subjects}" DisplayMemberPath="name" IsEditable="True" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="subjectTB" materialDesign:HintAssist.Hint="Subject Name"/>
                     <ComboBox ItemsSource="{Binding Classifications}" DisplayMemberPath="classification" Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="typeCB" materialDesign:HintAssist.Hint="Subject Type" />
+                    <Label x:Name="delete"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button x:Name="Accept" Style="{StaticResource MaterialDesignFlatButton}"
                                         IsDefault="True"
@@ -77,7 +78,7 @@
                             <Button x:Name="btnEdit" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Click="btnEdit_Click" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Edit" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
                                 <materialDesign:PackIcon Kind="Pencil" Width="20" Height="20"/>
                             </Button>
-                            <Button x:Name="btnDelete" Click="btnDelete_Click" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Delete" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
+                            <Button x:Name="btnDelete" Click="btnDelete_Click" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" ToolTip="Delete" ToolTipService.Placement="Right" Width="35" Height="34" Margin="0,0,10,10" FontSize="30" FontWeight="Bold">
                                 <materialDesign:PackIcon Kind="Delete" Width="20" Height="20"/>
                             </Button>
                         </StackPanel>

@@ -37,21 +37,19 @@ namespace ReportGenerator
             }
             else if (Accept.Content.ToString() == "YES")
                 deleteData();
-            else
-                MessageBox.Show("Empty Fields");
-            classCB.Text = "";
-            seminarCB.Text = "";
-            typeCB.Text = "";
-            dateTB.Text = "";
-            venueTB.Text = "";
-            classCB.IsEnabled = true;
-            typeCB.IsEnabled = true;
-            dateTB.IsEnabled = true;
-            venueTB.IsEnabled = true;
+            else if (!(classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
+                dateTB.Text != "" && venueTB.Text != ""))
+                emptyPrompt();
+        }
+        private void emptyPrompt()
+        {
+            delete.Content = "Please fill out all fields.";
+            delete.Visibility = Visibility.Visible;
         }
 
         private void addData()
         {
+            long lastid;
             string query;
             Connector db = new Connector();
             if(SeminarVM.getSeminar(seminarCB.Text) == null)
@@ -60,11 +58,12 @@ namespace ReportGenerator
                 {
                     query = String.Format("insert into seminartypes (type) values (" +
                         "'{0}');", typeCB.Text);
-                    if (db.addData(query))
+                    lastid = db.addData(query);
+                    if (lastid != -1)
                     {
                         TypeVM.Types.Add(new Type
                         {
-                            id = TypeVM.Types.Max(x => x.id) + 1,
+                            id = (int)lastid,
                             type = typeCB.Text
                         });
                     }
@@ -75,11 +74,12 @@ namespace ReportGenerator
                     TypeVM.getType(typeCB.Text).id, 
                     ClassificationVM.getClassification(classCB.Text).id,
                     venueTB.Text, dateTB.Text);
-                if (db.addData(query))
+                lastid = db.addData(query);
+                if (lastid != -1)
                 {
                     SeminarVM.Seminars.Add(new Seminar
                     {
-                        id = SeminarVM.Seminars.Max(e => e.id)+1,
+                        id = (int)lastid,
                         seminarName = seminarCB.Text,
                         typeid = TypeVM.getType(typeCB.Text).id,
                         classId = ClassificationVM.getClassification(classCB.Text).id,
@@ -91,11 +91,12 @@ namespace ReportGenerator
             query = String.Format("insert into seminarsattendance (facultyID, seminarID) values (" +
                 "{0}, {1});", CurrentUser.user.id, 
                 SeminarVM.getSeminar(seminarCB.Text).id);
-            if (db.addData(query))
+            lastid = db.addData(query);
+            if (lastid != -1)
             {
                 AttendanceVM.specificAttendances.Add(new Attendance
                 {
-                    id = AttendanceVM.Attendances.Max(e => e.id) + 1,
+                    id = (int)lastid,
                     facultyid = CurrentUser.user.id,
                     seminarid = SeminarVM.getSeminar(seminarCB.Text).id
                 });
@@ -110,7 +111,7 @@ namespace ReportGenerator
                 seminarCB.Text, TypeVM.getType(typeCB.Text).id,
                 ClassificationVM.getClassification(classCB.Text).id, venueTB.Text, dateTB.Text,
                 ((Attendance)dg.SelectedItem).seminarid);
-            if (db.addData(query))
+            if (db.addData(query) != -1)
             {
                 SeminarVM.getSeminar(((Attendance)dg.SelectedItem).seminarid).seminarName = seminarCB.Text;
                 SeminarVM.getSeminar(((Attendance)dg.SelectedItem).seminarid).typeid = TypeVM.getType(typeCB.Text).id;
@@ -196,8 +197,16 @@ namespace ReportGenerator
 
         private void deletePrompt()
         {
-            delete.Content = String.Format("Are you sure you want to delete {0}?", ((Attendance)dg.SelectedItem).seminar.seminarName);
-            Accept.Content = "YES";
+            try
+            {
+                delete.Content = String.Format("Are you sure you want to delete {0}?", ((Attendance)dg.SelectedItem).seminar.seminarName);
+                Accept.Content = "YES";
+            }
+            catch (Exception e)
+            {
+                delete.Content = "No row selected.";
+                Accept.Content = "OK";
+            }
 
             classCB.Visibility = Visibility.Collapsed;
             seminarCB.Visibility = Visibility.Collapsed;
@@ -214,6 +223,25 @@ namespace ReportGenerator
             dateTB.Visibility = Visibility.Visible;
             venueTB.Visibility = Visibility.Visible;
             delete.Visibility = Visibility.Collapsed;
+        }
+
+        private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+        {
+            if (!(classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
+                dateTB.Text != "" && venueTB.Text != "") && classCB.Visibility == Visibility.Visible)
+                eventArgs.Cancel();
+            else
+            {
+                classCB.Text = "";
+                seminarCB.Text = "";
+                typeCB.Text = "";
+                dateTB.Text = "";
+                venueTB.Text = "";
+                classCB.IsEnabled = true;
+                typeCB.IsEnabled = true;
+                dateTB.IsEnabled = true;
+                venueTB.IsEnabled = true;
+            }
         }
     }
 }

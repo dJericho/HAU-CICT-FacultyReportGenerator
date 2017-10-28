@@ -13,7 +13,7 @@
         <local:AttendanceVM/>
     </UserControl.DataContext>
     <Grid>
-        <materialDesign:DialogHost Identifier="add">
+        <materialDesign:DialogHost DialogClosing="DialogHost_DialogClosing">
 
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
