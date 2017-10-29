@@ -27,6 +27,7 @@ namespace ReportGenerator
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
+            cancel = false;
             if (classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
                 dateTB.Text != "" && venueTB.Text != "")
             {
@@ -225,8 +226,9 @@ namespace ReportGenerator
 
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
         {
-            if (!(classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
-                dateTB.Text != "" && venueTB.Text != "") && classCB.Visibility == Visibility.Visible)
+            Console.WriteLine(cancel);
+            if ((!(classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
+                dateTB.Text != "" && venueTB.Text != "") && classCB.Visibility == Visibility.Visible) && !cancel)
                 eventArgs.Cancel();
             else
             {
@@ -240,6 +242,12 @@ namespace ReportGenerator
                 dateTB.IsEnabled = true;
                 venueTB.IsEnabled = true;
             }
+        }
+
+        bool cancel = false;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            cancel = true;
         }
     }
 }

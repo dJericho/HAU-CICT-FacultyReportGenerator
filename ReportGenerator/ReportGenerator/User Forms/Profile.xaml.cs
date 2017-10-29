@@ -169,6 +169,7 @@ namespace ReportGenerator
 
         private void Accept_Click(object sender, RoutedEventArgs e)
         {
+            cancel = false;
             if (subjectTB.Text != "" && typeCB.Text != "")
             {
                 if (Accept.Content.ToString() == "ADD")
@@ -227,7 +228,7 @@ namespace ReportGenerator
 
         private void DialogHost_DialogClosing(object sender, DialogClosingEventArgs eventArgs)
         {
-            if (!(subjectTB.Text != "" && typeCB.Text != "") && typeCB.Visibility == Visibility.Visible)
+            if ((!(subjectTB.Text != "" && typeCB.Text != "") && typeCB.Visibility == Visibility.Visible)  && !cancel)
                 eventArgs.Cancel();
             else
             {
@@ -235,6 +236,13 @@ namespace ReportGenerator
                 typeCB.Text = "";
                 typeCB.IsEnabled = true;
             }
+        }
+
+        bool cancel = false;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            cancel = true;
         }
     }
 }
