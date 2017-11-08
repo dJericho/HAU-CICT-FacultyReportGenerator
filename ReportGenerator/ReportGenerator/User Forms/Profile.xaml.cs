@@ -134,13 +134,15 @@ namespace ReportGenerator
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            createPrompt();
             if (dg.SelectedItem != null)
             {
+                createPrompt();
                 Accept.Content = "EDIT";
                 typeCB.Text = ((FacultyLoads)dg.SelectedItem).subject.classification.classification;
                 subjectTB.Text = ((FacultyLoads)dg.SelectedItem).subject.name;
             }
+            else
+                noSelectedPrompt();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -179,7 +181,7 @@ namespace ReportGenerator
             }
             else if (Accept.Content.ToString() == "YES")
                 deleteData();
-            else if (!(subjectTB.Text != "" && typeCB.Text != ""))
+            else if (!(subjectTB.Text != "" && typeCB.Text != "") && Accept.Content.ToString() != "OK")
                 emptyPrompt();
         }
 
@@ -188,6 +190,14 @@ namespace ReportGenerator
         {
             delete.Content = "Please fill out all fields";
             delete.Visibility = Visibility.Visible;
+        }
+        private void noSelectedPrompt()
+        {
+            typeCB.Visibility = Visibility.Collapsed;
+            subjectTB.Visibility = Visibility.Collapsed;
+            delete.Visibility = Visibility.Visible;
+            delete.Content = "No row selected";
+            Accept.Content = "OK";
         }
         private void deletePrompt()
         {

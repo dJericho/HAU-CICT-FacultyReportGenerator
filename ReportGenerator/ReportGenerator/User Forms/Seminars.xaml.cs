@@ -39,13 +39,24 @@ namespace ReportGenerator
             else if (Accept.Content.ToString() == "YES")
                 deleteData();
             else if (!(classCB.Text != "" && seminarCB.Text != "" && typeCB.Text != "" &&
-                dateTB.Text != "" && venueTB.Text != ""))
+                dateTB.Text != "" && venueTB.Text != "") && Accept.Content.ToString() != "OK")
                 emptyPrompt();
         }
         private void emptyPrompt()
         {
             delete.Content = "Please fill out all fields.";
             delete.Visibility = Visibility.Visible;
+        }
+        private void noSelectedPrompt()
+        {
+            classCB.Visibility = Visibility.Collapsed;
+            seminarCB.Visibility = Visibility.Collapsed;
+            typeCB.Visibility = Visibility.Collapsed;
+            dateTB.Visibility = Visibility.Collapsed;
+            venueTB.Visibility = Visibility.Collapsed;
+            delete.Visibility = Visibility.Visible;
+            delete.Content = "No row selected";
+            Accept.Content = "OK";
         }
 
         private void addData()
@@ -133,16 +144,18 @@ namespace ReportGenerator
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            createPrompt();
-            Accept.Content = "EDIT";
-            if(dg.SelectedItem != null)
+            if (dg.SelectedItem != null)
             {
+                createPrompt();
+                Accept.Content = "EDIT";
                 seminarCB.Text = ((Attendance)dg.SelectedItem).seminar.seminarName;
                 classCB.Text = ((Attendance)dg.SelectedItem).seminar.classification.classification;
                 typeCB.Text = ((Attendance)dg.SelectedItem).seminar.type.type;
                 dateTB.Text = ((Attendance)dg.SelectedItem).seminar.date;
                 venueTB.Text = ((Attendance)dg.SelectedItem).seminar.venue;
             }
+            else
+                noSelectedPrompt();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
