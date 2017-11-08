@@ -52,6 +52,7 @@ namespace ReportGenerator
             }
             else if (export.IsSelected)
             {
+                DemoItemsListBox.SelectedIndex = 0;
                 GenerateReport.GenerateExcel();
             }
             else if (logout.IsSelected)
